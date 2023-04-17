@@ -1,0 +1,41 @@
+@use 'utils' as *;
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.app {
+    max-width: 87.5em; //1400px
+    margin: 0 auto;
+    font-family: $font;
+    padding: 0 2em;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    a {
+        text-decoration: none;
+        width: fit-content;
+    }
+
+    button,
+    input[type='button'] {
+        background-color: transparent;
+        border: none;
+    }
+
+    a,
+    button {
+        cursor: pointer;
+        color: black;
+    }
+
+    ul {
+        list-style: none;
+    }
+}

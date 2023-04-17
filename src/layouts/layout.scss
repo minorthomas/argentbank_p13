@@ -1,0 +1,32 @@
+@use '../styles/utils' as *;
+
+.header {
+    &_navigation {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        a {
+
+            img {
+                width: 13em;
+            }
+        }
+
+        ul {
+            display: flex;
+            flex-direction: row;
+            gap: 1em;
+            font-weight: bold;
+        }
+    }
+}
+
+.footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+    padding: 1em;
+}
