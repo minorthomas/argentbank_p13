@@ -1,2 +1,52 @@
 @use '../../styles/utils' as *;
 
+.hero {
+    background-image: url('../../assets/img/bank-tree.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 17.5em;
+    position: relative;
+    
+    &_card {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        width: 15em;
+        padding: 2em;
+        background-color: white;
+        gap: 1em;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        h1, p {
+            font-size: 1em;
+        }
+    }
+
+    @include device-size(large) {
+        height: 26em;
+        background-position: center;
+
+        &_card {
+            width: 18em;
+            right: 0;
+            left: inherit;
+
+            h1 {
+                font-size: 1.3em;
+            }
+        }
+    }
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
+    gap: 5em;
+    margin: 5em 0;
+
+    @include device-size(large) {
+        flex-direction: row;
+    }
+}

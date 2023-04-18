@@ -1,11 +1,11 @@
-import React from 'react';
+import './homecard.scss';
 
 export function HomeCard({ icon, title, content }) {
     return (
-        <div className='home_card'>
+        <section className='home_card'>
             {icon}
             <h2>{title}</h2>
             <p>{content}</p>
-        </div>
+        </section>
     );
 }

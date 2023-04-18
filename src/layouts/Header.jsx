@@ -10,10 +10,7 @@ export function Header() {
                 </Link>
                 <ul>
                     <li>
-                        <Link to='/'>O Tony</Link>
-                    </li>
-                    <li>
-                        <Link to='/'>&gt; Sign Out</Link>
+                        <Link to='/'>&gt; Sign In</Link>
                     </li>
                 </ul>
             </nav>

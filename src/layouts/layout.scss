@@ -1,6 +1,8 @@
 @use '../styles/utils' as *;
 
 .header {
+    padding: 0 1em;
+    
     &_navigation {
         display: flex;
         flex-direction: row;
@@ -28,5 +30,6 @@
     display: flex;
     justify-content: center;
     margin-top: auto;
-    padding: 1em;
+    padding: 1.5em 0;
+    border-top: 0.15em solid #CCCCCC;
 }
