@@ -1,18 +1,19 @@
-import Logo from '../assets/img/argentBankLogo.png';
+import { Link } from 'react-router-dom';
+import { Logo } from '../components/Logo';
 
 export function Header() {
     return (
         <header className='header'>
             <nav className='header_navigation'>
-                <a href='/'>
-                    <img src={Logo} alt='Logo argent bank de couleur verte' />
-                </a>
+                <Link to='/'>
+                    <Logo />
+                </Link>
                 <ul>
                     <li>
-                        <a href='/'>O Tony</a>
+                        <Link to='/'>O Tony</Link>
                     </li>
                     <li>
-                        <a href='/'>&gt; Sign Out</a>
+                        <Link to='/'>&gt; Sign Out</Link>
                     </li>
                 </ul>
             </nav>
