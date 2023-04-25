@@ -9,7 +9,6 @@
 }
 
 .app {
-    max-width: 87.5em; //1400px
     margin: 0 auto;
     font-family: $font;
     min-height: 100vh;
@@ -32,6 +31,20 @@
     button {
         cursor: pointer;
         color: black;
+    }
+
+    .green_btn {
+        border-color: $primary;
+        background-color: $primary;
+        color: white;
+        font-weight: bold;
+        padding: 0.8em;
+        border-style: outset;
+        border-width: 0.12em;
+
+        &:active {
+            border-style: inset;
+        }
     }
 
     ul {

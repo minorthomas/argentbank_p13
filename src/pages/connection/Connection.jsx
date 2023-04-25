@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './connection.scss';
 
 export function Connection() {
@@ -15,7 +16,7 @@ export function Connection() {
                 <h1>Sign In</h1>
                 <form className='connection_card_form'>
                     <div className='connection_card_form_input email'>
-                        <label htmlFor='email'>Email</label>
+                        <label htmlFor='email'>Username</label>
                         <input type='email' name='email' id='email' required />
                     </div>
                     <div className='connection_card_form_input password'>
@@ -32,7 +33,7 @@ export function Connection() {
                         <label htmlFor='checkbox'>Remember me</label>
                     </div>
                     <button type='submit' value='Sign In'>
-                        Sign In
+                        <Link to='/profile'>Sign In</Link>
                     </button>
                 </form>
             </section>
