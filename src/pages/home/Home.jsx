@@ -1,5 +1,3 @@
-import React from 'react';
-
 import './home.scss';
 import { HomeCard } from '../../components/homecard/HomeCard';
 
@@ -148,6 +146,7 @@ const CardData = [
 ];
 
 export function Home() {
+
     return (
         <>
             <section className='hero'>
