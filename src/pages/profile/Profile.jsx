@@ -31,7 +31,7 @@ export function Profile() {
 
     useEffect(() => {
         async function userData() {
-            const data = await getUserInfos(state.user.token);
+            const data = await getUserInfos(state.auth.token);
 
             if (data) {
                 dispatch(
@@ -49,7 +49,7 @@ export function Profile() {
         }
 
         userData();
-    }, [state.user.token, dispatch, navigate]);
+    }, [state.auth.token, dispatch, navigate]);
 
     return (
         <main className='profile'>

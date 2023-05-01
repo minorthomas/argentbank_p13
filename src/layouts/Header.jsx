@@ -1,8 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Logo } from '../components/Logo';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../states/authSlice';
-import { handleToken, handleUser } from '../states/userSlice';
+import { logout, handleToken } from '../states/authSlice';
+import { handleUser } from '../states/userSlice';
 
 export function Header() {
     const dispatch = useDispatch();
@@ -13,6 +13,7 @@ export function Header() {
         event.preventDefault();
 
         dispatch(logout());
+        dispatch(handleToken(null));
         dispatch(
             handleUser({
                 id: null,
@@ -21,9 +22,10 @@ export function Header() {
                 email: null,
             })
         );
-        dispatch(handleToken(null));
         navigate('/signin');
     }
+
+    console.log(state);
 
     return (
         <header className='header'>
@@ -32,7 +34,7 @@ export function Header() {
                     <Logo />
                 </Link>
                 <ul>
-                    {state.auth.loggedIn ? (
+                    {state.auth.isAuth ? (
                         <>
                             <li>
                                 <Link to='/profile'>

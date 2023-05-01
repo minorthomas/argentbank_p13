@@ -1,4 +1,4 @@
-export function LoginForm({ handleLogin }) {
+export function LoginForm({ handleLogin, error }) {
     return (
         <section className='connection_card'>
             <svg
@@ -14,6 +14,11 @@ export function LoginForm({ handleLogin }) {
                 <div className='connection_card_form_input email'>
                     <label htmlFor='email'>Username</label>
                     <input type='email' name='email' id='email' required />
+                    {error.includes('found') && (
+                        <p className='error'>
+                            User not found
+                        </p>
+                    )}
                 </div>
                 <div className='connection_card_form_input password'>
                     <label htmlFor='password'>Password</label>
@@ -23,6 +28,11 @@ export function LoginForm({ handleLogin }) {
                         id='password'
                         required
                     />
+                    {error.includes('invalid') && (
+                        <p className='error'>
+                            Invalid password
+                        </p>
+                    )}
                 </div>
                 <div className='connection_card_form_checkbox'>
                     <input type='checkbox' name='checkbox' id='checkbox' />

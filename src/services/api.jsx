@@ -8,11 +8,11 @@ export async function getToken(data) {
             body: JSON.stringify(data),
         });
         let body = await res.json();
+        let token = body.body.token
 
-        return body.body.token;
+        return body;
     } catch (err) {
         console.log(err);
-        return;
     }
 }
 
