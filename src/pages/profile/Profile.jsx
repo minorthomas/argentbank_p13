@@ -1,5 +1,10 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { Account } from '../../components/account/Account';
 import './profile.scss';
+import { useEffect } from 'react';
+import { handleUser } from '../../states/userSlice';
+import { getUserInfos } from '../../services/api';
+// import { useNavigate } from 'react-router-dom';
 
 const ACCOUNTS = [
     {
@@ -20,13 +25,35 @@ const ACCOUNTS = [
 ];
 
 export function Profile() {
+    const dispatch = useDispatch();
+    const state = useSelector((state) => state);
+
+    useEffect(() => {
+        async function userData() {
+            const data = await getUserInfos(state.user.token);
+
+            dispatch(
+                handleUser({
+                    id: data.id,
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    email: data.email,
+                })
+            );
+        }
+
+        userData();
+    }, [state.user.token, dispatch]);
+    
+    console.log(state);
+
     return (
         <main className='profile'>
             <div className='profile_header'>
                 <h1>
                     Welcome back
                     <br />
-                    Tony Jarvis!
+                    {`${state.user.firstName} ${state.user.lastName}`} !
                 </h1>
                 <button className='green_btn'>Edit name</button>
             </div>
