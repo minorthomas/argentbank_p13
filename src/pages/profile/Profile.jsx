@@ -4,7 +4,7 @@ import './profile.scss';
 import { useEffect } from 'react';
 import { handleUser } from '../../states/userSlice';
 import { getUserInfos } from '../../services/api';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const ACCOUNTS = [
     {
@@ -27,25 +27,29 @@ const ACCOUNTS = [
 export function Profile() {
     const dispatch = useDispatch();
     const state = useSelector((state) => state);
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function userData() {
             const data = await getUserInfos(state.user.token);
 
-            dispatch(
-                handleUser({
-                    id: data.id,
-                    firstName: data.firstName,
-                    lastName: data.lastName,
-                    email: data.email,
-                })
-            );
+            if (data) {
+                dispatch(
+                    handleUser({
+                        id: data.id,
+                        firstName: data.firstName,
+                        lastName: data.lastName,
+                        email: data.email,
+                    })
+                );
+            } else {
+                navigate('/signin');
+            }
+            
         }
 
         userData();
-    }, [state.user.token, dispatch]);
-    
-    console.log(state);
+    }, [state.user.token, dispatch, navigate]);
 
     return (
         <main className='profile'>

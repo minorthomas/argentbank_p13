@@ -19,22 +19,32 @@
             display: flex;
             flex-direction: row;
             gap: 1em;
-            font-weight: bold;
 
             li {
-                a {
+                a, button {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     gap: 0.3em;
+                    font-weight: bold !important;
+                    font-size: 0.8em;
 
                     @include device-size(small) {
                         flex-direction: row;
+                        font-size: 1em;
                     }
                 
                     svg {
                         width: 1em;
                         height: 1em;
+                    }
+                    
+                    &:hover {
+                        color: $primary;
+
+                        svg {
+                            fill: $primary;
+                        }
                     }
                 }
             }

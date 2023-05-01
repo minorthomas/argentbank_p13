@@ -1,7 +1,7 @@
 import { LoginForm } from '../../components/LoginForm';
 import { useNavigate } from 'react-router-dom';
 import './login.scss';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { handleToken } from '../../states/userSlice';
 import { getToken } from '../../services/api';
 import { login } from '../../states/authSlice';
