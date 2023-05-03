@@ -25,9 +25,9 @@ export function useFetch() {
         try {
             const response = await fetch(url, options);
             const json = await response.json();
+            setData(json);
             setIsLoading(false);
             setError(false);
-            setData(json);
         } catch (error) {
             console.log(error);
             setError(true);
