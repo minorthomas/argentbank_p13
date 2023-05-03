@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Account } from '../../components/account/Account';
 import './profile.scss';
-import { useEffect } from 'react';
+import { useEffect} from 'react';
 import { handleUser } from '../../states/userSlice';
 import { getUserInfos } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
+import HeaderProfile from '../../components/HeaderProfile';
 
 const ACCOUNTS = [
     {
@@ -45,7 +46,6 @@ export function Profile() {
             } else {
                 navigate('/signin');
             }
-            
         }
 
         userData();
@@ -53,14 +53,7 @@ export function Profile() {
 
     return (
         <main className='profile'>
-            <div className='profile_header'>
-                <h1>
-                    Welcome back
-                    <br />
-                    {`${state.user.firstName} ${state.user.lastName}`} !
-                </h1>
-                <button className='green_btn'>Edit name</button>
-            </div>
+            <HeaderProfile firstName={state.user.firstName} lastName={state.user.lastName} token={state.auth.token}/>
 
             {ACCOUNTS.map((element, index) => (
                 <Account
