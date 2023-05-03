@@ -1,9 +1,9 @@
-import { LoginForm } from '../../components/LoginForm';
+import { LoginForm } from '../../components/log/LoginForm';
 import { useNavigate } from 'react-router-dom';
-import './login.scss';
 import { useDispatch } from 'react-redux';
-import { login, handleToken } from '../../states/authSlice';
 import { useState } from 'react';
+import { login, handleToken } from '../../features/auth/auth';
+import './login.scss';
 
 export function Login() {
     const dispatch = useDispatch();

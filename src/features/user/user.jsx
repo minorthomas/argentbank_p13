@@ -28,4 +28,4 @@ export const userSlice = createSlice({
     },
 });
 
-export const { handleToken, handleUser, handleName } = userSlice.actions;
+export const { handleUser, handleName } = userSlice.actions;

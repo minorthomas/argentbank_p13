@@ -1,11 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Account } from '../../components/account/Account';
 import './profile.scss';
-import { useEffect} from 'react';
-import { handleUser } from '../../states/userSlice';
-import { getUserInfos } from '../../services/api';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import HeaderProfile from '../../components/HeaderProfile';
+import { handleUser } from '../../features/user/user';
 
 const ACCOUNTS = [
     {
@@ -28,32 +27,49 @@ const ACCOUNTS = [
 export function Profile() {
     const dispatch = useDispatch();
     const state = useSelector((state) => state);
+    const user = state.user;
+    const auth = state.auth;
     const navigate = useNavigate();
 
     useEffect(() => {
         async function userData() {
-            const data = await getUserInfos(state.auth.token);
+            const config = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${auth.token}`,
+                },
+            };
 
-            if (data) {
-                dispatch(
-                    handleUser({
-                        id: data.id,
-                        firstName: data.firstName,
-                        lastName: data.lastName,
-                        email: data.email,
-                    })
-                );
-            } else {
-                navigate('/signin');
-            }
+            await fetch(`${process.env.REACT_APP_API_URL}/profile`, config)
+                .then((res) => res.json())
+                .then((body) => {
+                    if (body.body) {
+                        dispatch(
+                            handleUser({
+                                id: body.body.id,
+                                firstName: body.body.firstName,
+                                lastName: body.body.lastName,
+                                email: body.body.email,
+                            })
+                        );
+                    } else {
+                        navigate('/signin');
+                    }
+                })
+                .catch((err) => console.log(err));
         }
 
         userData();
-    }, [state.auth.token, dispatch, navigate]);
+    }, [auth.token, dispatch, navigate]);
 
     return (
         <main className='profile'>
-            <HeaderProfile firstName={state.user.firstName} lastName={state.user.lastName} token={state.auth.token}/>
+            <HeaderProfile
+                firstName={user.firstName}
+                lastName={user.lastName}
+                token={auth.token}
+            />
 
             {ACCOUNTS.map((element, index) => (
                 <Account

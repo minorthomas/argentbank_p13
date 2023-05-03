@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { handleName } from '../states/userSlice';
 import { useDispatch } from 'react-redux';
+import { handleName } from '../features/user/user';
 
 export default function EditNameForm({ firstName, lastName, token }) {
     const [toggleEditBtn, setToggleEditBtn] = useState(false);
     const [errorName, setErrorName] = useState(false);
     const dispatch = useDispatch();
-    var regex = /^[a-zA-Z ]{2,30}$/;
+    const regex = /^[a-zA-Z ]{2,30}$/;
 
     function handleEditBtn(event) {
         event.preventDefault();
@@ -23,15 +23,17 @@ export default function EditNameForm({ firstName, lastName, token }) {
             lastName: event.target[1].value ? event.target[1].value : lastName,
         };
 
+        const config = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(userInfos),
+        };
+
         if (regex.test(userInfos.firstName) && regex.test(userInfos.lastName)) {
-            await fetch(`${process.env.REACT_APP_API_URL}/profile`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify(userInfos),
-            })
+            await fetch(`${process.env.REACT_APP_API_URL}/profile`, config)
                 .then((res) => res.json())
                 .then((body) => {
                     if (body.body) {

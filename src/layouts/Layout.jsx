@@ -3,7 +3,7 @@ import { Header } from "./Header";
 
 import './layout.scss';
 
-export function Layout({ children }) {
+function Layout({ children }) {
     return (
         <>
             <Header/>
@@ -12,3 +12,5 @@ export function Layout({ children }) {
         </>
     );
 }
+
+export default Layout
