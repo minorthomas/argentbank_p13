@@ -1,9 +1,7 @@
 import { LoginForm } from '../../components/LoginForm';
 import { useNavigate } from 'react-router-dom';
 import './login.scss';
-import { useDispatch, useSelector } from 'react-redux';
-// import { handleToken } from '../../states/userSlice';
-import { getToken } from '../../services/api';
+import { useDispatch } from 'react-redux';
 import { login, handleToken } from '../../states/authSlice';
 import { useState } from 'react';
 
@@ -20,7 +18,7 @@ export function Login() {
             password: event.target[1].value,
         };
 
-        await fetch('http://localhost:3001/api/v1/user/login', {
+        await fetch(`${process.env.REACT_APP_API_URL}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

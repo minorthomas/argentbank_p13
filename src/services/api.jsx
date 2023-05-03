@@ -1,6 +1,6 @@
 export async function getUserInfos(token) {
     try {
-        const res = await fetch('http://localhost:3001/api/v1/user/profile', {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/profile`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

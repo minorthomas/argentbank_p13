@@ -24,7 +24,7 @@ export default function EditNameForm({ firstName, lastName, token }) {
         };
 
         if (regex.test(userInfos.firstName) && regex.test(userInfos.lastName)) {
-            await fetch('http://localhost:3001/api/v1/user/profile', {
+            await fetch(`${process.env.REACT_APP_API_URL}/profile`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

@@ -25,8 +25,6 @@ export function Header() {
         navigate('/signin');
     }
 
-    console.log(state);
-
     return (
         <header className='header'>
             <nav className='header_navigation'>
