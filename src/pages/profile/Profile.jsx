@@ -5,24 +5,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import HeaderProfile from '../../components/HeaderProfile';
 import { handleUser } from '../../features/user/user';
-
-const ACCOUNTS = [
-    {
-        title: 'Argent Bank Checking (x8349)',
-        amount: '2,082.79',
-        balanceType: 'Available Balance',
-    },
-    {
-        title: 'Argent Bank Savings (x6712)',
-        amount: '10,928.42',
-        balanceType: 'Available Balance',
-    },
-    {
-        title: 'Argent Bank Credit Card (x8349)',
-        amount: '184.30',
-        balanceType: 'Current Balance',
-    },
-];
+import ACCOUNTS from '../../__mocks__/accounts.json';
 
 export function Profile() {
     const dispatch = useDispatch();
@@ -54,7 +37,7 @@ export function Profile() {
                             })
                         );
                     } else {
-                        navigate('/signin');
+                        navigate('/login');
                     }
                 })
                 .catch((err) => console.log(err));

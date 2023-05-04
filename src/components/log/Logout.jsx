@@ -20,7 +20,7 @@ export function Logout() {
                 email: null,
             })
         );
-        navigate('/signin');
+        navigate('/');
     };
 
     return (

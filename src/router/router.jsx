@@ -7,7 +7,7 @@ export function Router() {
     return (
         <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/signin' element={<Login />} />
+            <Route path='/login' element={<Login />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='*' element={<Navigate replace to='/' />} />
         </Routes>
