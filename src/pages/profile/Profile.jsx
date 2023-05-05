@@ -1,54 +1,62 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Account } from '../../components/account/Account';
-import './profile.scss';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import HeaderProfile from '../../components/HeaderProfile';
+import { UserProfile } from '../../components/UserProfile';
 import { handleUser } from '../../features/user/user';
 import ACCOUNTS from '../../__mocks__/accounts.json';
+import { handleToken, logout } from '../../features/auth/auth';
+import { useFetch } from '../../hooks/useFetch';
+import './profile.scss';
 
 export function Profile() {
+    const { fetchData, status, data, isLoading, error } = useFetch();
     const dispatch = useDispatch();
     const state = useSelector((state) => state);
     const user = state.user;
     const auth = state.auth;
     const navigate = useNavigate();
 
-    useEffect(() => {
-        async function userData() {
-            const config = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${auth.token}`,
-                },
-            };
+    const config = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${auth.token}`,
+        },
+    };
 
-            await fetch(`${process.env.REACT_APP_API_URL}/profile`, config)
-                .then((res) => res.json())
-                .then((body) => {
-                    if (body.body) {
-                        dispatch(
-                            handleUser({
-                                id: body.body.id,
-                                firstName: body.body.firstName,
-                                lastName: body.body.lastName,
-                                email: body.body.email,
-                            })
-                        );
-                    } else {
-                        navigate('/login');
-                    }
+    useEffect(() => {
+        fetchData(`${process.env.REACT_APP_API_URL}/profile`, config);
+
+        if (status === 401) {
+            dispatch(logout());
+            dispatch(handleToken(null));
+            dispatch(
+                handleUser({
+                    id: null,
+                    firstName: null,
+                    lastName: null,
+                    email: null,
                 })
-                .catch((err) => console.log(err));
+            );
+            navigate('/login');
         }
 
-        userData();
-    }, [auth.token, dispatch, navigate]);
+        if (!isLoading && !error && data.body) {
+            dispatch(
+                handleUser({
+                    id: data.body.id,
+                    firstName: data.body.firstName,
+                    lastName: data.body.lastName,
+                    email: data.body.email,
+                })
+            );
+        }
+    }, [isLoading, error]);
 
     return (
         <main className='profile'>
-            <HeaderProfile
+            <UserProfile
                 firstName={user.firstName}
                 lastName={user.lastName}
                 token={auth.token}

@@ -31,7 +31,7 @@ export function Header() {
                                 </Link>
                             </li>
                             <li>
-                                <Logout/>
+                                <Logout />
                             </li>
                         </>
                     ) : (

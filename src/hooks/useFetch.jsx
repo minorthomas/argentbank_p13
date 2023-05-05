@@ -13,6 +13,7 @@ export function useFetch() {
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState(null);
     const [error, setError] = useState(false);
+    const [status, setStatus] = useState(null);
 
     /**
      * Get data via fetch api
@@ -24,6 +25,7 @@ export function useFetch() {
         setIsLoading(true);
         try {
             const response = await fetch(url, options);
+            setStatus(response.status);
             const json = await response.json();
             setData(json);
             setIsLoading(false);
@@ -36,5 +38,5 @@ export function useFetch() {
         }
     }
 
-    return { fetchData, data, isLoading, error };
+    return { fetchData, status, data, isLoading, error };
 }

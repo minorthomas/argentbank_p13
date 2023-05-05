@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { handleName } from '../features/user/user';
+import { useFetch } from '../hooks/useFetch';
 
-export default function EditNameForm({ firstName, lastName, token }) {
+export function UserProfile({ firstName, lastName, token }) {
+    const { fetchData, isLoading, data } = useFetch();
     const [toggleEditBtn, setToggleEditBtn] = useState(false);
     const [errorName, setErrorName] = useState(false);
     const dispatch = useDispatch();
@@ -33,20 +35,22 @@ export default function EditNameForm({ firstName, lastName, token }) {
         };
 
         if (regex.test(userInfos.firstName) && regex.test(userInfos.lastName)) {
-            await fetch(`${process.env.REACT_APP_API_URL}/profile`, config)
-                .then((res) => res.json())
-                .then((body) => {
-                    if (body.body) {
-                        dispatch(handleName(userInfos));
-                        setToggleEditBtn(!toggleEditBtn);
-                        setErrorName(false);
-                    }
-                })
-                .catch((err) => console.log(err));
+            fetchData(`${process.env.REACT_APP_API_URL}/profile`, config)
         } else {
             setErrorName(true);
         }
     }
+
+    useEffect(() => {
+        if (!isLoading && data.body) {
+            dispatch(handleName({
+                firstName: data.body.firstName,
+                lastName: data.body.lastName
+            }));
+            setToggleEditBtn(!toggleEditBtn);
+            setErrorName(false);
+        }
+    }, [isLoading])
 
     return (
         <div className='profile_header'>

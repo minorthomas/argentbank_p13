@@ -1,11 +1,13 @@
 import { LoginForm } from '../../components/log/LoginForm';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { login, handleToken } from '../../features/auth/auth';
+import { useFetch } from '../../hooks/useFetch';
 import './login.scss';
 
 export function Login() {
+    const { fetchData, data, isLoading} = useFetch();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [error, setError] = useState(null);
@@ -18,27 +20,29 @@ export function Login() {
             password: event.target[1].value,
         };
 
-        await fetch(`${process.env.REACT_APP_API_URL}/login`, {
+        const config = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(userInfo),
-        })
-            .then((res) => res.json())
-            .then((body) => {
-                if (body.body) {
-                    dispatch(handleToken(body.body.token));
-                    dispatch(login());
-                    navigate('/profile');
-                }
-                if (body.status === 400) {
-                    setError(body.message);
-                }
-                return body;
-            })
-            .catch((err) => console.log(err));
+        };
+
+        fetchData(`${process.env.REACT_APP_API_URL}/login`, config);
     }
+
+    useEffect(() => {
+        if (!isLoading && data.body) {
+            dispatch(handleToken(data.body.token));
+            dispatch(login());
+            navigate('/profile');
+        }
+
+        if (data && data.status === 400) {
+            setError(data.message);
+        }
+        
+    }, [isLoading, data])
 
     return (
         <main className='connection'>
