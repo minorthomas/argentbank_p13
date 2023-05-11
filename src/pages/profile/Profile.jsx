@@ -27,7 +27,9 @@ export function Profile() {
 
     useEffect(() => {
         fetchData(`${process.env.REACT_APP_API_URL}/profile`, config);
+    }, [])
 
+    useEffect(() => {
         if (status === 401) {
             dispatch(logout());
             dispatch(handleToken(null));
@@ -52,7 +54,8 @@ export function Profile() {
                 })
             );
         }
-    }, [isLoading, error]);
+
+    }, [isLoading, error, data]);
 
     return (
         <main className='profile'>

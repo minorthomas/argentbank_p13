@@ -50,7 +50,7 @@ export function UserProfile({ firstName, lastName, token }) {
             setToggleEditBtn(!toggleEditBtn);
             setErrorName(false);
         }
-    }, [isLoading])
+    }, [isLoading, data])
 
     return (
         <div className='profile_header'>

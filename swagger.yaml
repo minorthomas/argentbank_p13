@@ -203,13 +203,13 @@ paths:
         "500":
           description: Internal Server Error
   /user/accounts/{accountId}/transactions/{transactionId}:
-    put:
+    get:
       security:
         - Bearer: []
       tags:
         - Account Module
-      summary: Update user transactions
-      description: API to update transaction infos
+      summary: User transaction API
+      description: API to retrieve user transaction
       parameters:
         - in: header
           name: Authorization
@@ -218,6 +218,35 @@ paths:
           type: string
         - name: accountId
           description: Account identifier to retrieve transactions related to the account
+          in: path
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Account transactions were successfully retrieved
+          schema:
+            $ref: "#/definitions/AccountTransactions"
+        "400":
+          description: Invalid Fields
+        "500":
+          description: Internal Server Error
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Account Module
+      summary: Update user transaction
+      description: API to update transaction infos
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - name: accountId
+          description: Account identifier to retrieve transaction related to the account
           in: path
           required: true
           type: string
@@ -246,8 +275,8 @@ paths:
         - Bearer: []
       tags:
         - Account Module
-      summary: Update user transactions
-      description: API to update transaction infos
+      summary: Delete user transaction
+      description: API to delete transaction info
       parameters:
         - in: header
           name: Authorization
@@ -255,7 +284,7 @@ paths:
           required: true
           type: string
         - name: accountId
-          description: Account identifier to retrieve transactions related to the account
+          description: Account identifier to retrieve transaction related to the account
           in: path
           required: true
           type: string

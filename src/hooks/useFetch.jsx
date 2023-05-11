@@ -14,6 +14,7 @@ export function useFetch() {
     const [data, setData] = useState(null);
     const [error, setError] = useState(false);
     const [status, setStatus] = useState(null);
+    
 
     /**
      * Get data via fetch api
