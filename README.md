@@ -16,6 +16,9 @@ Argent Bank is an online banking platform
 3. Open the terminal and enter the command __npm i__
 4. Then enter the command __npm start__
 
+## Install back-end
+https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API
+
 ### Use the app
 Login with existing accounts:  
 - Email: tony@stark.com
