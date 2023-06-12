@@ -17,14 +17,12 @@ Argent Bank is an online banking platform
 4. Then enter the command __npm start__
 
 ### Use the app
-- Login with existing accounts:
-1.
-- tony@stark.com
-- password123
-or
-2.
-- steve@rogers.com
-- password456
+Login with existing accounts:  
+- Email: tony@stark.com
+- Pass: password123  
+OR  
+- Email: steve@rogers.com
+- Pass: password456
 
 __/!\Make sure you have Node.js installed on your machine__
 
